@@ -6,13 +6,13 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.1.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
-    <groupId>tn.mahdi.lena</groupId>
-    <artifactId>mahdiMz</artifactId>
+    <groupId>tn.Aziz</groupId>
+    <artifactId>Aziz</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mahdiMz</name>
-    <description>mahdiMz</description>
+    <name>Aziz</name>
+    <description>Aziz</description>
 
     <properties>
         <java.version>17</java.version>
