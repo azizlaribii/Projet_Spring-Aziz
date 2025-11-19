@@ -2,6 +2,7 @@ package tn.AzizLaribi.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +16,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/clients")
 @Tag(name = "Clients", description = "CRUD et recherches pour les clients")
+@RequiredArgsConstructor
 public class ClientController {
 
     private final IClientService clientService;
 
-    public ClientController(IClientService clientService) {
-        this.clientService = clientService;
-    }
-
-    // CRUD
     @Operation(description = "Récupérer tous les clients")
     @GetMapping
     public List<Client> getAll() {
@@ -62,7 +59,6 @@ public class ClientController {
         return ResponseEntity.noContent().build();
     }
 
-    // Keyword (derived) query
     @Operation(description = "Chercher un client par son identifiant")
     @GetMapping("/by-identifiant/{identifiant}")
     public ResponseEntity<Client> getByIdentifiant(@PathVariable String identifiant) {
@@ -70,7 +66,6 @@ public class ClientController {
         return c != null ? ResponseEntity.ok(c) : ResponseEntity.notFound().build();
     }
 
-    // JPQL query with date range
     @Operation(description = "Lister les clients dont la première visite est entre deux dates")
     @GetMapping("/first-visit")
     public List<Client> getByFirstVisitBetween(

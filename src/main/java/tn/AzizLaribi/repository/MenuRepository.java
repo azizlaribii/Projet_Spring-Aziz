@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import tn.AzizLaribi.Entity.Menu;
 import tn.AzizLaribi.Entity.TypeMenu;
-
 import java.util.List;
+import java.util.Optional;
 
 public interface MenuRepository extends JpaRepository<Menu, Long> {
 
@@ -17,4 +17,6 @@ public interface MenuRepository extends JpaRepository<Menu, Long> {
     @Query("SELECT DISTINCT m FROM Menu m JOIN m.composants c WHERE m.typeMenu = :type AND c.prix > :prix")
     List<Menu> findMenusByTypeWithComposantPriceGreaterThan(@Param("type") TypeMenu type,
                                                             @Param("prix") Float prix);
+
+    Optional<Menu> findByLibelleMenu(String libelleMenu);
 }

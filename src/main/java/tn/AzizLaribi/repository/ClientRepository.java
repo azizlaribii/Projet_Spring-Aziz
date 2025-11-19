@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface ClientRepository extends JpaRepository<Client, Long> {
+public interface  ClientRepository extends JpaRepository<Client, Long> {
 
 	// Derived query by unique identifiant
 	Optional<Client> findByIdentifiant(String identifiant);

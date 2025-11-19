@@ -20,13 +20,7 @@ public class Restaurant {
     @JoinColumn(name = "chaine_id")
     private ChaineRestauration chaineRestauration;
 
-    // Unidirectional OneToMany using a join table to match diagram and reach 10 tables
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(
-            name = "restaurants_menus",
-            joinColumns = @JoinColumn(name = "restaurant_id"),
-            inverseJoinColumns = @JoinColumn(name = "menu_id")
-    )
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Menu> menus = new ArrayList<>();
 
     public Restaurant() {}
@@ -36,45 +30,17 @@ public class Restaurant {
         this.nbPlacesMax = nbPlacesMax;
     }
 
-    public Long getIdRestaurant() {
-        return idRestaurant;
-    }
-
-    public void setIdRestaurant(Long idRestaurant) {
-        this.idRestaurant = idRestaurant;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public Long getNbPlacesMax() {
-        return nbPlacesMax;
-    }
-
-    public void setNbPlacesMax(Long nbPlacesMax) {
-        this.nbPlacesMax = nbPlacesMax;
-    }
-
-    public ChaineRestauration getChaineRestauration() {
-        return chaineRestauration;
-    }
-
-    public void setChaineRestauration(ChaineRestauration chaineRestauration) {
-        this.chaineRestauration = chaineRestauration;
-    }
-
-    public List<Menu> getMenus() {
-        return menus;
-    }
-
-    public void setMenus(List<Menu> menus) {
-        this.menus = menus;
-    }
+    // Getters and Setters
+    public Long getIdRestaurant() { return idRestaurant; }
+    public void setIdRestaurant(Long idRestaurant) { this.idRestaurant = idRestaurant; }
+    public String getNom() { return nom; }
+    public void setNom(String nom) { this.nom = nom; }
+    public Long getNbPlacesMax() { return nbPlacesMax; }
+    public void setNbPlacesMax(Long nbPlacesMax) { this.nbPlacesMax = nbPlacesMax; }
+    public ChaineRestauration getChaineRestauration() { return chaineRestauration; }
+    public void setChaineRestauration(ChaineRestauration chaineRestauration) { this.chaineRestauration = chaineRestauration; }
+    public List<Menu> getMenus() { return menus; }
+    public void setMenus(List<Menu> menus) { this.menus = menus; }
 
     @Override
     public String toString() {
@@ -85,4 +51,3 @@ public class Restaurant {
                 '}';
     }
 }
-

@@ -20,7 +20,15 @@ public class Menu {
     @Enumerated(EnumType.STRING)
     private TypeMenu typeMenu;
 
-    private Float prixTotal;
+    private Float prixTotal = 0.0f;
+
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
+
+    @ManyToOne
+    @JoinColumn(name = "chef_cuisinier_id")
+    private ChefCuisinier chefCuisinier;
 
     @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
@@ -30,15 +38,6 @@ public class Menu {
     @JsonIgnore
     private List<Commande> commandes = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "menus_chefs",
-            joinColumns = @JoinColumn(name = "menu_id"),
-            inverseJoinColumns = @JoinColumn(name = "chef_id")
-    )
-    @JsonIgnore
-    private Set<ChefCuisinier> chefs = new HashSet<>();
-
     public Menu() {}
 
     public Menu(String libelleMenu, TypeMenu typeMenu, Float prixTotal) {
@@ -47,61 +46,23 @@ public class Menu {
         this.prixTotal = prixTotal;
     }
 
-    public Long getIdMenu() {
-        return idMenu;
-    }
-
-    public void setIdMenu(Long idMenu) {
-        this.idMenu = idMenu;
-    }
-
-    public String getLibelleMenu() {
-        return libelleMenu;
-    }
-
-    public void setLibelleMenu(String libelleMenu) {
-        this.libelleMenu = libelleMenu;
-    }
-
-    public TypeMenu getTypeMenu() {
-        return typeMenu;
-    }
-
-    public void setTypeMenu(TypeMenu typeMenu) {
-        this.typeMenu = typeMenu;
-    }
-
-    public Float getPrixTotal() {
-        return prixTotal;
-    }
-
-    public void setPrixTotal(Float prixTotal) {
-        this.prixTotal = prixTotal;
-    }
-
-     public List<Composant> getComposants() {
-         return composants;
-     }
-
-     public void setComposants(List<Composant> composants) {
-         this.composants = composants;
-     }
-
-     public List<Commande> getCommandes() {
-         return commandes;
-     }
-
-     public void setCommandes(List<Commande> commandes) {
-         this.commandes = commandes;
-     }
-
-     public Set<ChefCuisinier> getChefs() {
-         return chefs;
-     }
-
-     public void setChefs(Set<ChefCuisinier> chefs) {
-         this.chefs = chefs;
-     }
+    // Getters and Setters
+    public Long getIdMenu() { return idMenu; }
+    public void setIdMenu(Long idMenu) { this.idMenu = idMenu; }
+    public String getLibelleMenu() { return libelleMenu; }
+    public void setLibelleMenu(String libelleMenu) { this.libelleMenu = libelleMenu; }
+    public TypeMenu getTypeMenu() { return typeMenu; }
+    public void setTypeMenu(TypeMenu typeMenu) { this.typeMenu = typeMenu; }
+    public Float getPrixTotal() { return prixTotal; }
+    public void setPrixTotal(Float prixTotal) { this.prixTotal = prixTotal; }
+    public Restaurant getRestaurant() { return restaurant; }
+    public void setRestaurant(Restaurant restaurant) { this.restaurant = restaurant; }
+    public ChefCuisinier getChefCuisinier() { return chefCuisinier; }
+    public void setChefCuisinier(ChefCuisinier chefCuisinier) { this.chefCuisinier = chefCuisinier; }
+    public List<Composant> getComposants() { return composants; }
+    public void setComposants(List<Composant> composants) { this.composants = composants; }
+    public List<Commande> getCommandes() { return commandes; }
+    public void setCommandes(List<Commande> commandes) { this.commandes = commandes; }
 
     @Override
     public String toString() {
@@ -113,4 +74,3 @@ public class Menu {
                 '}';
     }
 }
-

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import tn.AzizLaribi.Entity.Client;
 import tn.AzizLaribi.repository.ClientRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,7 +28,7 @@ public class ClientService implements IClientService {
 
     @Override
     public Client updateClient(Client e) {
-        return clientRepository.save(e);//save method in jpa repository is used for both add and update
+        return clientRepository.save(e);
     }
 
     @Override
@@ -38,7 +39,6 @@ public class ClientService implements IClientService {
     @Override
     public void removeClient(Long idClient) {
         clientRepository.deleteById(idClient);
-
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public List<Client> findClientsFirstVisitBetween(java.time.LocalDate start, java.time.LocalDate end) {
+    public List<Client> findClientsFirstVisitBetween(LocalDate start, LocalDate end) {
         return clientRepository.findClientsFirstVisitBetween(start, end);
     }
 }

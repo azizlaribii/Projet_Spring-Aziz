@@ -1,8 +1,9 @@
 package tn.AzizLaribi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "chef_cuisiniers")
@@ -19,8 +20,9 @@ public class ChefCuisinier {
     @Enumerated(EnumType.STRING)
     private TypeChef typeChef;
 
-    @ManyToMany(mappedBy = "chefs")
-    private Set<Menu> menus = new HashSet<>();
+    @OneToMany(mappedBy = "chefCuisinier")
+    @JsonIgnore
+    private List<Menu> menus = new ArrayList<>();
 
     public ChefCuisinier() {}
 
@@ -30,45 +32,17 @@ public class ChefCuisinier {
         this.typeChef = typeChef;
     }
 
-    public Long getIdChefCuisinier() {
-        return idChefCuisinier;
-    }
-
-    public void setIdChefCuisinier(Long idChefCuisinier) {
-        this.idChefCuisinier = idChefCuisinier;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public TypeChef getTypeChef() {
-        return typeChef;
-    }
-
-    public void setTypeChef(TypeChef typeChef) {
-        this.typeChef = typeChef;
-    }
-
-    public Set<Menu> getMenus() {
-        return menus;
-    }
-
-    public void setMenus(Set<Menu> menus) {
-        this.menus = menus;
-    }
+    // Getters and Setters
+    public Long getIdChefCuisinier() { return idChefCuisinier; }
+    public void setIdChefCuisinier(Long idChefCuisinier) { this.idChefCuisinier = idChefCuisinier; }
+    public String getNom() { return nom; }
+    public void setNom(String nom) { this.nom = nom; }
+    public String getPrenom() { return prenom; }
+    public void setPrenom(String prenom) { this.prenom = prenom; }
+    public TypeChef getTypeChef() { return typeChef; }
+    public void setTypeChef(TypeChef typeChef) { this.typeChef = typeChef; }
+    public List<Menu> getMenus() { return menus; }
+    public void setMenus(List<Menu> menus) { this.menus = menus; }
 
     @Override
     public String toString() {
@@ -80,4 +54,3 @@ public class ChefCuisinier {
                 '}';
     }
 }
-
