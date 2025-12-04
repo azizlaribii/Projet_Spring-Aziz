@@ -1,5 +1,7 @@
 package tn.AzizLaribi.services;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.AzizLaribi.Entity.*;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@Slf4j
 public class CommandeService implements ICommandeService {
 
     private final CommandeRepository commandeRepository;
@@ -90,5 +93,40 @@ public class CommandeService implements ICommandeService {
         commande.setMenu(menu);
 
         commandeRepository.save(commande);
+    }
+    @Scheduled(cron = "0 0/1 * * * *")
+    @Override
+    public void findCurrentYearCommandesOrderByNote() {
+
+        int currentYear = LocalDate.now().getYear();
+
+        List<Commande> commandes =
+                commandeRepository.findByYearOrderByNote(currentYear);
+
+        for (Commande c : commandes) {
+            log.info("La commande faite le {} d'un montant global de {} a une note de {}",
+                    c.getDateCommande(),
+                    c.getTotalCommande(),
+                    c.getNote());
+        }
+    }
+    @Scheduled(cron = "0 0/1 * * * *")
+    @Override
+    public void menuPlusCommande() {
+
+        List<Object[]> result = commandeRepository.findMostOrderedMenu();
+
+        if (result.isEmpty()) {
+            log.info("Aucun menu n’a encore été commandé.");
+            return;
+        }
+
+        Object[] top = result.get(0);
+
+        String menuName = (String) top[0];
+        Long count = (Long) top[1];
+
+        log.info("Le menu le plus commandé dans votre restaurant est {} commandé {} fois",
+                menuName, count);
     }
 }

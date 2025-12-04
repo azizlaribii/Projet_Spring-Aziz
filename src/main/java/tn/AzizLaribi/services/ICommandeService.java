@@ -19,4 +19,7 @@ public interface ICommandeService {
 
     // Méthode du PDF
     void ajouterCommandeEtAffecterAClientEtMenu(Commande commande, String identifiant, String libelleMenu);
+    void findCurrentYearCommandesOrderByNote();
+    void menuPlusCommande();
+
 }

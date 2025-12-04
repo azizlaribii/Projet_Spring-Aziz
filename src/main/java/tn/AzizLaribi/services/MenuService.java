@@ -1,5 +1,6 @@
 package tn.AzizLaribi.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.AzizLaribi.Entity.Menu;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 @Service
 @Transactional
+@Slf4j
 public class MenuService implements IMenuService {
 
     private final MenuRepository menuRepository;
@@ -84,4 +86,5 @@ public class MenuService implements IMenuService {
         menu.setPrixTotal(nouveauPrix);
         return menuRepository.save(menu);
     }
+
 }
